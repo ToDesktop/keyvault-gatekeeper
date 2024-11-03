@@ -1,9 +1,6 @@
 import { Command } from "@commander-js/extra-typings";
 import { createServer } from "./server.js";
-import {
-	notaryToolApiKeyCredentialsSchema,
-	notaryToolPasswordCredentialsSchema,
-} from "./routes/getNotarizationCredentials.js";
+import { notaryToolPasswordCredentialsSchema } from "./routes/getNotarizationCredentials.js";
 import { formatMaybeZodError } from "./utils.js";
 
 export type macNotarizationOptions = {
