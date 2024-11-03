@@ -24,7 +24,6 @@ export async function signFile(
 		}
 		return windowsSign(fileName, content, options.windowsCert);
 	}
-	// return writeFileToTmp(content);
 	// Only Windows is supported for now.
 	throw new Error("Unsupported platform");
 }
