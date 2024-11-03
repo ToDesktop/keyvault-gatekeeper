@@ -4,7 +4,7 @@
 	"description": "Manages delegated access to code signing, secrets and notarization credentials on Azure Key Vault.",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/todesktop/keyvault-gatekeeper"
+		"url": "https://github.com/ToDesktop/keyvault-gatekeeper"
 	},
 	"license": "MIT",
 	"author": {
