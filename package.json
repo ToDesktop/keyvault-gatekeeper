@@ -1,7 +1,7 @@
 {
 	"name": "keyvault-gatekeeper",
 	"version": "0.0.0",
-	"description": "npx create-typescript-app",
+	"description": "Manages delegated access to code signing, secrets and notarization credentials on Azure Key Vault.",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/todesktop/keyvault-gatekeeper"
@@ -9,9 +9,19 @@
 	"license": "MIT",
 	"author": {
 		"name": "Dave Jeffery",
-		"email": "dave@davejeffery.com"
+		"email": "dave@todesktop.com"
 	},
 	"type": "module",
+	"exports": {
+		".": {
+			"types": {
+				"import": "./lib/index.d.ts",
+				"require": "./lib/index.d.cts"
+			},
+			"import": "./lib/index.js",
+			"require": "./lib/index.cjs"
+		}
+	},
 	"main": "./lib/index.js",
 	"files": [
 		"lib/",
@@ -25,11 +35,26 @@
 		"lint": "eslint . --max-warnings 0",
 		"lint:knip": "knip",
 		"prepare": "husky",
+		"start": "node --watch --env-file .env lib/index.js",
+		"start:client": "node --watch --env-file .env lib/client/index.js",
 		"test": "vitest",
 		"tsc": "tsc"
 	},
 	"lint-staged": {
 		"*": "prettier --ignore-unknown --write"
+	},
+	"dependencies": {
+		"@azure/identity": "^4.5.0",
+		"@azure/keyvault-secrets": "^4.9.0",
+		"@commander-js/extra-typings": "^12.1.0",
+		"@electron/notarize": "^2.5.0",
+		"axios": "^1.7.7",
+		"commander": "^12.1.0",
+		"execa": "^9.5.1",
+		"form-data": "^4.0.1",
+		"slash": "^5.1.0",
+		"tmp-promise": "^3.0.3",
+		"zod": "^3.23.8"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.13.0",
