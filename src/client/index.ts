@@ -69,13 +69,3 @@ export async function signFile(pathToFile: string): Promise<string> {
 		throw error;
 	}
 }
-
-async function main() {
-	// const credentials = await getNotarizationCredentials();
-	// console.log(credentials);
-
-	await signFile("/Users/davejeffery/Downloads/Embra Mac Installer (2).zip");
-	// console.log(signedFile);
-}
-
-void main();
