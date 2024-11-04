@@ -1,6 +1,6 @@
 {
 	"name": "keyvault-gatekeeper",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "Manages delegated access to code signing, secrets and notarization credentials on Azure Key Vault.",
 	"repository": {
 		"type": "git",

@@ -1,3 +1,9 @@
+## [0.1.2](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.1...0.1.2) (2024-11-04)
+
+### Bug Fixes
+
+- `certType` typings ([85f6ffb](https://github.com/ToDesktop/keyvault-gatekeeper/commit/85f6ffbed8f3e1a77c531954460a7c29ec6701b1))
+
 ## [0.1.1](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.0...0.1.1) (2024-11-04)
 
 ### Bug Fixes
