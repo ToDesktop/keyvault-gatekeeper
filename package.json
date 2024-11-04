@@ -22,7 +22,10 @@
 			"require": "./lib/index.cjs"
 		}
 	},
-	"main": "./lib/index.js",
+	"main": "./lib/client/index.js",
+	"bin": {
+		"keyvault-gatekeeper": "./cli.js"
+	},
 	"files": [
 		"lib/",
 		"package.json",
