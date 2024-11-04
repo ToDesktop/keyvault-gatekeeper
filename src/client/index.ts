@@ -4,6 +4,8 @@ import FormData from "form-data";
 import { createReadStream, createWriteStream } from "fs";
 import { Stream } from "stream";
 
+export { NotaryOutput } from "../routes/getNotarizationCredentials.js";
+
 export async function getSecret(secretName: string): Promise<string> {
 	const response = await axios.post("http://localhost:3000/getSecret", {
 		secretName,
