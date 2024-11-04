@@ -1,5 +1,8 @@
 <h1 align="center">Keyvault Gatekeeper</h1>
 
+Retreives code signing and notarization credentials from Azure Key Vault and
+delegates the signing and notarization process to a local server.
+
 ## How it works
 
 The **priviliged process** can read certificate and secrets from Azure KeyVault based on the configuration passed in via the `start` command.
