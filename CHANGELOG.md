@@ -1,3 +1,9 @@
+## [0.1.4](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.3...0.1.4) (2024-11-04)
+
+### Bug Fixes
+
+- export NotaryOutput type ([1054472](https://github.com/ToDesktop/keyvault-gatekeeper/commit/1054472e4bbe18bfcb66d978768279020fb5b877))
+
 ## [0.1.3](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.2...0.1.3) (2024-11-04)
 
 ### Bug Fixes
