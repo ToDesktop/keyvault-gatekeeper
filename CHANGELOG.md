@@ -1,3 +1,9 @@
+## [0.1.3](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.2...0.1.3) (2024-11-04)
+
+### Bug Fixes
+
+- remove unused code ([423cf8e](https://github.com/ToDesktop/keyvault-gatekeeper/commit/423cf8e1e9fe010b84bf84d47274d286c3a79a96))
+
 ## [0.1.2](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.1...0.1.2) (2024-11-04)
 
 ### Bug Fixes
