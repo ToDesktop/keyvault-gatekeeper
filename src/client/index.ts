@@ -14,7 +14,15 @@ export async function getSecret(secretName: string): Promise<string> {
 	return response.data;
 }
 
-export async function getCertBase64(certType: string): Promise<string> {
+export async function getCertBase64(
+	certType:
+		| "mac"
+		| "windows"
+		| "macInstaller"
+		| "masDevelopment"
+		| "masDistribution"
+		| "masInstaller",
+): Promise<string> {
 	const response = await axios.post("http://localhost:3000/getCert", {
 		certType,
 	});
