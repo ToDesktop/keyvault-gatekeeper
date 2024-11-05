@@ -1,3 +1,9 @@
+## [0.1.6](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.5...0.1.6) (2024-11-05)
+
+### Bug Fixes
+
+- lockfile ([0dfe87b](https://github.com/ToDesktop/keyvault-gatekeeper/commit/0dfe87b5d66f66342edb4409c71e3d93262b8c69))
+
 ## [0.1.5](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.4...0.1.5) (2024-11-05)
 
 ### Bug Fixes
