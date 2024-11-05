@@ -1,3 +1,9 @@
+## [0.1.7](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.6...0.1.7) (2024-11-05)
+
+### Bug Fixes
+
+- exports ([329f831](https://github.com/ToDesktop/keyvault-gatekeeper/commit/329f831593647c7c3e4eff7657abb9ba5164b025))
+
 ## [0.1.6](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.5...0.1.6) (2024-11-05)
 
 ### Bug Fixes
