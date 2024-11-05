@@ -1,8 +1,6 @@
 import { basename } from "path";
-import { execa } from "execa";
 import os from "os";
 import { join } from "path";
-import slash from "slash";
 import { file } from "tmp-promise";
 import { getKeyVaultCredentials } from "../keyVault/keyVaultCredentials.js";
 import { writeFile } from "fs/promises";
@@ -34,12 +32,15 @@ async function writeFileToTmp(content: Buffer): Promise<SignResult> {
 	return { path, cleanup };
 }
 
+// TODO: Support Azure Trusted Signing (TD-2775)
 export async function windowsSign(
 	fileName: string,
 	content: Buffer,
 	certName: string,
 ): Promise<SignResult> {
-	// TODO: Support Azure Trusted Signing (TD-2775)
+	const { execa } = await import("execa");
+	const { default: slash } = await import("slash");
+
 	const credentials = getKeyVaultCredentials();
 	const { path, cleanup } = await writeFileToTmp(content);
 	const shellCompatiblePath = slash(path);
