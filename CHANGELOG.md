@@ -1,3 +1,9 @@
+## [0.1.8](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.7...0.1.8) (2024-11-05)
+
+### Bug Fixes
+
+- path to bin ([ba082ef](https://github.com/ToDesktop/keyvault-gatekeeper/commit/ba082ef860cf5a34f6f6f9003107c84a5b88e7a5))
+
 ## [0.1.7](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.6...0.1.7) (2024-11-05)
 
 ### Bug Fixes
