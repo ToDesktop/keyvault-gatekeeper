@@ -1,3 +1,9 @@
+## [0.1.5](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.4...0.1.5) (2024-11-05)
+
+### Bug Fixes
+
+- compatibility with commonjs ([821f18c](https://github.com/ToDesktop/keyvault-gatekeeper/commit/821f18ceda94aadcf27beffa4fec03d7d7dddd59))
+
 ## [0.1.4](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.3...0.1.4) (2024-11-04)
 
 ### Bug Fixes
