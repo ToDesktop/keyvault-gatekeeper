@@ -24,7 +24,7 @@
 	},
 	"main": "./lib/client/index.js",
 	"bin": {
-		"keyvault-gatekeeper": "./cli.js"
+		"keyvault-gatekeeper": "./lib/cli.js"
 	},
 	"files": [
 		"lib/",
