@@ -6,11 +6,21 @@ import { Stream } from "stream";
 
 export { NotaryOutput } from "../routes/getNotarizationCredentials.js";
 
-export async function getSecret(secretName: string): Promise<string> {
-	const response = await axios.post("http://localhost:3000/getSecret", {
-		secretName,
-	});
-	if (typeof response.data !== "string") {
+export async function getSecret(
+	secretName: string,
+): Promise<{ secretValue: string }> {
+	const response = await axios.post<{ secretValue: string }>(
+		"http://localhost:3292/getSecret",
+		{
+			secretName,
+		},
+		{
+			headers: {
+				"Content-Type": "application/json",
+			},
+		},
+	);
+	if (typeof response.data?.secretValue !== "string") {
 		throw new Error("Invalid secret response");
 	}
 	return response.data;
@@ -25,7 +35,7 @@ export async function getCertBase64(
 		| "masDistribution"
 		| "masInstaller",
 ): Promise<string> {
-	const response = await axios.post("http://localhost:3000/getCert", {
+	const response = await axios.post("http://localhost:3292/getCert", {
 		certType,
 	});
 	if (typeof response.data !== "string") {
@@ -36,8 +46,13 @@ export async function getCertBase64(
 
 export async function getNotarizationCredentials(): Promise<NotaryOutput> {
 	const response = await axios.post(
-		"http://localhost:3000/getNotarizationCredentials",
+		"http://localhost:3292/getNotarizationCredentials",
 		{},
+		{
+			headers: {
+				"Content-Type": "application/json",
+			},
+		},
 	);
 	return response.data as NotaryOutput;
 }
@@ -47,7 +62,7 @@ export async function signFile(pathToFile: string): Promise<string> {
 	formData.append("file", createReadStream(pathToFile));
 	try {
 		const response = await axios.post<Stream>(
-			"http://localhost:3000/signFile",
+			"http://localhost:3292/signFile",
 			formData,
 			{
 				headers: formData.getHeaders(),

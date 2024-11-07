@@ -32,7 +32,8 @@ const router: Record<
 		}
 		const secretValue = await getSecretHandler(secretName, options.secrets);
 		if (secretValue) {
-			res.end(secretValue);
+			res.setHeader("Content-Type", "application/json");
+			res.end(JSON.stringify({ secretValue }));
 		} else {
 			notFound(res);
 		}
@@ -103,7 +104,7 @@ export const createServer = function (options: ParsedOptions) {
 		})();
 	});
 
-	server.listen(3000, () =>
-		console.log("Server running on https://localhost:3000"),
+	server.listen(3292, () =>
+		console.log("Server running on http://localhost:3292"),
 	);
 };

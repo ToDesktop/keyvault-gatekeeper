@@ -17,6 +17,19 @@ export function getPOSTBodyAsJSON<T = Record<string, string>>(
 	req: IncomingMessage,
 ): Promise<T> {
 	return new Promise((resolve, reject) => {
+		if (req.readableEnded) {
+			reject(new Error("Request stream has already ended"));
+			return;
+		}
+
+		if (req.readable === false) {
+			reject(new Error("Request stream is not readable"));
+			return;
+		}
+
+		// Resume the stream if it's paused
+		req.resume();
+
 		let body = "";
 		req.on("data", (chunk: Buffer) => {
 			body += chunk.toString();
