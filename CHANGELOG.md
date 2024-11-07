@@ -1,3 +1,9 @@
+## [0.1.9](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.8...0.1.9) (2024-11-07)
+
+### Bug Fixes
+
+- return type for `/getSecret` ([1bbd49f](https://github.com/ToDesktop/keyvault-gatekeeper/commit/1bbd49f77b703083305f7c2314c18a5d03f2db81))
+
 ## [0.1.8](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.7...0.1.8) (2024-11-05)
 
 ### Bug Fixes
