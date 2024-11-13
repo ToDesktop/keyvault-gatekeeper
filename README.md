@@ -39,7 +39,7 @@ keyvault-gatekeeper start
 ### Example command
 
 ```bash
-keyvault-gatekeeper start --mac-cert "azure-keyvault-reference-to-cert" --mac-notarize '{"appleId": "appleId", "teamId": "teamId", "$appSpecificPassword": "azure-keyvault-reference-to-secret"}' --secrets='{"GITHUB_PAT":"5072cc0c-3de0-4b88-be27-b054bdbbf8dd"}'
+keyvault-gatekeeper start --mac-cert "azure-keyvault-reference-to-cert" --mac-notarize '{"appleId": "appleId", "teamId": "teamId", "appSpecificPassword$": "azure-keyvault-reference-to-secret"}' --secrets='{"GITHUB_PAT":"5072cc0c-3de0-4b88-be27-b054bdbbf8dd"}'
 ```
 
 ### Environment Variables
