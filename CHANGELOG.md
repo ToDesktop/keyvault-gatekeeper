@@ -1,3 +1,9 @@
+# [0.2.0](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.9...0.2.0) (2024-11-14)
+
+### Features
+
+- Switch to signing file in place instead of sending it to http server and the copying the signed file ([bd04fba](https://github.com/ToDesktop/keyvault-gatekeeper/commit/bd04fbaac21858d3b82c2aeb5f46da2db7e2fd9b))
+
 ## [0.1.9](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.8...0.1.9) (2024-11-07)
 
 ### Bug Fixes
