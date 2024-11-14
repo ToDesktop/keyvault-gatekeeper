@@ -1,8 +1,6 @@
-import http from "http";
 import { getSecretHandler } from "./routes/getSecret.js";
 import { ParsedOptions } from "./start.js";
-import { readFile } from "fs/promises";
-import { IncomingMessage, ServerResponse } from "http";
+import http, { IncomingMessage, ServerResponse } from "http";
 import { getCertHandler } from "./routes/getCert.js";
 import { getNotarizationSecretsFromHSM } from "./routes/getNotarizationCredentials.js";
 import {
@@ -10,7 +8,6 @@ import {
 	getPOSTBodyAsJSON,
 	internalServerError,
 	notFound,
-	parseFormUploadData,
 } from "./utils.js";
 import { signFile } from "./routes/signFile.js";
 
@@ -51,17 +48,13 @@ const router: Record<
 		}
 	},
 	"/signFile": async (req, res, options) => {
-		const { fileName, content } = await parseFormUploadData(req);
-		if (!fileName || !content) {
+		const { filePath } = await getPOSTBodyAsJSON(req);
+
+		if (!filePath) {
 			return badRequest(res);
 		}
-		const signedFile = await signFile(fileName, content, options);
-		res.writeHead(200, {
-			"Content-Disposition": `attachment; filename=${fileName}`,
-			"Content-Type": "application/octet-stream",
-		});
-		res.end(await readFile(signedFile.path));
-		await signedFile.cleanup();
+		const signedFile = await signFile(filePath, options);
+		res.end(JSON.stringify({ signedFile }));
 	},
 	"/getNotarizationCredentials": async (req, res, options) => {
 		if (!options.macNotarize) {

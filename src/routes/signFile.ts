@@ -1,49 +1,33 @@
 import { basename } from "path";
 import os from "os";
 import { join } from "path";
-import { file } from "tmp-promise";
 import { getKeyVaultCredentials } from "../keyVault/keyVaultCredentials.js";
-import { writeFile } from "fs/promises";
 import { ParsedOptions } from "../start.js";
 
-type SignResult = {
-	path: string;
-	cleanup: () => Promise<void>;
-};
-
 export async function signFile(
-	fileName: string,
-	content: Buffer,
+	filePath: string,
 	options: ParsedOptions,
-): Promise<SignResult> {
+): Promise<string> {
 	if (process.platform === "win32") {
 		if (!options.windowsCert) {
 			throw new Error("Windows certificate is not defined");
 		}
-		return windowsSign(fileName, content, options.windowsCert);
+		return windowsSign(filePath, options.windowsCert);
 	}
 	// Only Windows is supported for now.
 	throw new Error("Unsupported platform");
 }
 
-async function writeFileToTmp(content: Buffer): Promise<SignResult> {
-	const { path, cleanup } = await file();
-	await writeFile(path, content);
-	return { path, cleanup };
-}
-
 // TODO: Support Azure Trusted Signing (TD-2775)
 export async function windowsSign(
-	fileName: string,
-	content: Buffer,
+	filePath: string,
 	certName: string,
-): Promise<SignResult> {
+): Promise<string> {
 	const { execa } = await import("execa");
 	const { default: slash } = await import("slash");
 
 	const credentials = getKeyVaultCredentials();
-	const { path, cleanup } = await writeFileToTmp(content);
-	const shellCompatiblePath = slash(path);
+	const shellCompatiblePath = slash(filePath);
 	const hrstart = process.hrtime();
 
 	try {
@@ -88,7 +72,6 @@ export async function windowsSign(
 			.replace(credentials.id, "***");
 
 		console.error("azuresigntool error", errorMessage);
-		await cleanup();
 		throw new Error("Failed to codesign the Windows build");
 	}
 
@@ -98,8 +81,5 @@ export async function windowsSign(
 			shellCompatiblePath,
 		)}`,
 	);
-	return {
-		path,
-		cleanup,
-	};
+	return filePath;
 }
