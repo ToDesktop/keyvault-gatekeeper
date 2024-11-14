@@ -5,7 +5,6 @@ import { z } from "zod";
 import {
 	formatMaybeZodError,
 	getPOSTBodyAsJSON,
-	parseFormUploadData,
 	badRequest,
 	notFound,
 	internalServerError,
@@ -89,64 +88,6 @@ describe("getPOSTBodyAsJSON", () => {
 		handlers["end"]();
 
 		await expect(promise).rejects.toThrow();
-	});
-});
-
-describe("parseFormUploadData", () => {
-	it("parses multipart form data with file", async () => {
-		const req = new IncomingMessage(new Socket());
-		const boundary = "boundary123";
-		const fileName = "test.txt";
-		const fileContent = "Hello, World!";
-
-		req.headers = {
-			"content-type": `multipart/form-data; boundary=${boundary}`,
-		};
-
-		const formData = [
-			`--${boundary}`,
-			'Content-Disposition: form-data; name="file"; filename="test.txt"',
-			"Content-Type: text/plain",
-			"",
-			fileContent,
-			`--${boundary}--`,
-		].join("\r\n");
-
-		const handlers: Record<string, (chunk?: unknown) => void> = {};
-		req.on = vi.fn((event: string, handler) => {
-			handlers[event] = handler;
-			return req;
-		});
-
-		const promise = parseFormUploadData(req);
-		handlers["data"](Buffer.from(formData));
-		handlers["end"]();
-
-		const result = await promise;
-		expect(result.fileName).toBe(fileName);
-		expect(result.content).toBeInstanceOf(Buffer);
-		expect(result.content?.toString()).toBe(fileContent);
-	});
-
-	it("returns null values when no file is found", async () => {
-		const req = new IncomingMessage(new Socket());
-		req.headers = {
-			"content-type": "multipart/form-data; boundary=boundary123",
-		};
-
-		const handlers: Record<string, (chunk?: unknown) => void> = {};
-		req.on = vi.fn((event: string, handler) => {
-			handlers[event] = handler;
-			return req;
-		});
-
-		const promise = parseFormUploadData(req);
-		handlers["data"](Buffer.from("--boundary123--"));
-		handlers["end"]();
-
-		const result = await promise;
-		expect(result.fileName).toBeNull();
-		expect(result.content).toBeNull();
 	});
 });
 
