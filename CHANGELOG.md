@@ -1,3 +1,9 @@
+## [0.2.1](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.2.0...0.2.1) (2024-11-18)
+
+### Bug Fixes
+
+- client-side `signFile` function should give better error message that includes the reason for failed signing ([acb4814](https://github.com/ToDesktop/keyvault-gatekeeper/commit/acb48140fd5eb0e900a5b0d533dc3321521df213))
+
 # [0.2.0](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.9...0.2.0) (2024-11-14)
 
 ### Features
