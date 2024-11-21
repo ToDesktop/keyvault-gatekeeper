@@ -10,10 +10,17 @@ import * as secretClient from "../keyVault/secretClient.js";
 // Mock the getSecret function
 vi.mock("../keyVault/secretClient.js", () => ({
 	getSecret: vi.fn(),
+	downloadSecretFileFromHsm: vi.fn(() => ({
+		secretFilePath: "path/to/secret.p8",
+		async cleanup() {},
+	})),
 }));
 
 describe("getNotarizationSecretsFromHSM", () => {
 	const mockGetSecret = vi.mocked(secretClient.getSecret);
+	const mockDownloadSecretFileFromHsm = vi.mocked(
+		secretClient.downloadSecretFileFromHsm,
+	);
 
 	it("correctly transforms password credentials", async () => {
 		const inputCredentials = {
@@ -41,14 +48,19 @@ describe("getNotarizationSecretsFromHSM", () => {
 			appleApiKeyId: "KEY123",
 			appleApiIssuer: "ISSUER123",
 		};
-		const mockApiKey = "retrieved-api-key";
-		mockGetSecret.mockResolvedValueOnce(mockApiKey);
+		mockDownloadSecretFileFromHsm.mockResolvedValueOnce({
+			secretFilePath: "path/to/secret.p8",
+			async cleanup() {},
+		});
 
 		const result = await getNotarizationSecretsFromHSM(inputCredentials);
 
-		expect(mockGetSecret).toHaveBeenCalledWith("api-key-name-in-vault");
+		expect(mockDownloadSecretFileFromHsm).toHaveBeenCalledWith(
+			"api-key-name-in-vault",
+			{ postfix: ".p8" },
+		);
 		expect(result).toEqual({
-			appleApiKey: mockApiKey,
+			appleApiKey: "path/to/secret.p8",
 			appleApiKeyId: "KEY123",
 			appleApiIssuer: "ISSUER123",
 			appleApiKey$: "api-key-name-in-vault",

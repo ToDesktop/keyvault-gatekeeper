@@ -1,7 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { NotaryOutput } from "../routes/getNotarizationCredentials.js";
-
-export { NotaryOutput } from "../routes/getNotarizationCredentials.js";
+export type { NotaryOutput };
 
 export async function getSecret(
 	secretName: string,
