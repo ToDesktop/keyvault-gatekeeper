@@ -1,13 +1,22 @@
 import { Command } from "@commander-js/extra-typings";
 import { createServer } from "./server.js";
-import { notaryToolPasswordCredentialsSchema } from "./routes/getNotarizationCredentials.js";
+import {
+	notaryToolApiKeyCredentialsSchema,
+	notaryToolPasswordCredentialsSchema,
+} from "./routes/getNotarizationCredentials.js";
 import { formatMaybeZodError } from "./utils.js";
 
-export type macNotarizationOptions = {
-	appleId: string;
-	teamId: string;
-	appSpecificPassword$: string;
-};
+export type macNotarizationOptions =
+	| {
+			appleId: string;
+			teamId: string;
+			appSpecificPassword$: string;
+	  }
+	| {
+			appleApiKey$: string;
+			appleApiKeyId: string;
+			appleApiIssuer: string;
+	  };
 
 export type ParsedOptions = {
 	macCert: string | undefined;
@@ -24,6 +33,13 @@ function parseNotarizationOptions(options: string) {
 	// TODO: handle appleApiKey style options
 	const optionsObj: unknown = JSON.parse(options);
 	try {
+		if (
+			typeof optionsObj === "object" &&
+			optionsObj !== null &&
+			"appleApiKey$" in optionsObj
+		) {
+			return notaryToolApiKeyCredentialsSchema.parse(optionsObj);
+		}
 		return notaryToolPasswordCredentialsSchema.parse(optionsObj);
 	} catch (err: unknown) {
 		console.error("Invalid notarization options");

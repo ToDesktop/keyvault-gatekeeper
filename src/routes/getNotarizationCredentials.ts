@@ -2,7 +2,10 @@ import type {
 	NotaryToolApiKeyCredentials,
 	NotaryToolPasswordCredentials,
 } from "@electron/notarize/lib/types.d.ts";
-import { getSecret } from "../keyVault/secretClient.js";
+import {
+	downloadSecretFileFromHsm,
+	getSecret,
+} from "../keyVault/secretClient.js";
 import { z } from "zod";
 
 export const notaryToolPasswordCredentialsSchema = z.object({
@@ -37,10 +40,13 @@ export async function getNotarizationSecretsFromHSM(
 			appleIdPassword: appSpecificPassword,
 		};
 	} else if ("appleApiKey$" in credentialsWithoutSecret) {
-		const appleApiKey = await getSecret(credentialsWithoutSecret.appleApiKey$);
+		const { secretFilePath } = await downloadSecretFileFromHsm(
+			credentialsWithoutSecret.appleApiKey$,
+			{ postfix: ".p8" },
+		);
 		return {
 			...credentialsWithoutSecret,
-			appleApiKey,
+			appleApiKey: secretFilePath,
 		};
 	} else {
 		throw new Error("Invalid credentials");
