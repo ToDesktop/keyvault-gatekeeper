@@ -18,6 +18,7 @@ export type ParsedOptions = {
 	masDistributionCert: string | undefined;
 	masInstallerCert: string | undefined;
 	secrets: Record<string, string> | undefined;
+	azureTrustedSigningClientSecret: string | undefined;
 };
 
 function parseNotarizationOptions(options: string) {
@@ -65,6 +66,10 @@ export const startCommand = new Command("start")
 		"--secrets <json>",
 		"JSON object containing the secrets to use in Azure KeyVault",
 	)
+	.option(
+		"--azure-trusted-signing-client-secret <name>",
+		"Name of the azure trusted signing client secret to use in Azure KeyVault",
+	)
 	.action((options) => {
 		const parsedOptions = {
 			macCert: options.macCert,
@@ -79,6 +84,7 @@ export const startCommand = new Command("start")
 			secrets: options.secrets
 				? (JSON.parse(options.secrets) as Record<string, string>)
 				: undefined,
+			azureTrustedSigningClientSecret: options.azureTrustedSigningClientSecret,
 		};
 		createServer(parsedOptions);
 	});

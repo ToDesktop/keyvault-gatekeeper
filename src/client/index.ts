@@ -72,3 +72,10 @@ export async function signFile(filePath: string): Promise<string> {
 		throw error;
 	}
 }
+
+export async function getAzureTrustedClientSigningSecret(): Promise<string> {
+	const response = await axios.post<{ secretValue: string }>(
+		"http://localhost:3292/getAzureTrustedClientSigningSecret",
+	);
+	return response.data.secretValue;
+}

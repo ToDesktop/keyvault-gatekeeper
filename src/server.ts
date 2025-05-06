@@ -10,6 +10,7 @@ import {
 	notFound,
 } from "./utils.js";
 import { signFile } from "./routes/signFile.js";
+import { getSecret } from "./keyVault/secretClient.js";
 
 const router: Record<
 	string,
@@ -21,6 +22,16 @@ const router: Record<
 > = {
 	"/": (req, res) => {
 		res.end("Hello, World!");
+	},
+	"/getAzureTrustedClientSigningSecret": async (req, res, options) => {
+		if (!options.azureTrustedSigningClientSecret) {
+			return badRequest(res);
+		}
+		const secretValue = await getSecret(
+			options.azureTrustedSigningClientSecret,
+		);
+		res.setHeader("Content-Type", "application/json");
+		res.end(JSON.stringify({ secretValue }));
 	},
 	"/getSecret": async (req, res, options) => {
 		const { secretName } = await getPOSTBodyAsJSON(req);
