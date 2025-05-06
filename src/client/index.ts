@@ -1,7 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { NotaryOutput } from "../routes/getNotarizationCredentials.js";
-
-export { NotaryOutput } from "../routes/getNotarizationCredentials.js";
+export type { NotaryOutput };
 
 export async function getSecret(
 	secretName: string,
@@ -65,9 +64,7 @@ export async function signFile(filePath: string): Promise<string> {
 		return response.data.signedFile;
 	} catch (error) {
 		if (error instanceof AxiosError) {
-			throw new Error(
-				`Failed to sign file: ${filePath} (${error.response?.status}, ${error.response?.statusText})`,
-			);
+			error.message = `Failed to sign file: ${error.response?.data} (path: ${filePath})`;
 		}
 		throw error;
 	}

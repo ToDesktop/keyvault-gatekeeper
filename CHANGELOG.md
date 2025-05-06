@@ -1,3 +1,15 @@
+# [0.3.0](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.2.1...0.3.0) (2024-11-21)
+
+### Features
+
+- add support for notarizing with API key ([5890c58](https://github.com/ToDesktop/keyvault-gatekeeper/commit/5890c58168d7d5e95f761470988169f42c13c5f4))
+
+## [0.2.1](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.2.0...0.2.1) (2024-11-18)
+
+### Bug Fixes
+
+- client-side `signFile` function should give better error message that includes the reason for failed signing ([acb4814](https://github.com/ToDesktop/keyvault-gatekeeper/commit/acb48140fd5eb0e900a5b0d533dc3321521df213))
+
 # [0.2.0](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.1.9...0.2.0) (2024-11-14)
 
 ### Features
