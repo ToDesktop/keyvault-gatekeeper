@@ -1,3 +1,9 @@
+# [0.4.0](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.3.0...0.4.0) (2025-05-06)
+
+### Features
+
+- add endpoint to retrieve Azure trusted client signing secret and update options for server ([e6f6209](https://github.com/ToDesktop/keyvault-gatekeeper/commit/e6f620969981364d147fd62dfd94ccb7afaac33c))
+
 # [0.3.0](https://github.com/ToDesktop/keyvault-gatekeeper/compare/0.2.1...0.3.0) (2024-11-21)
 
 ### Features
